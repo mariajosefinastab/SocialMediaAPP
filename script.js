@@ -10,7 +10,7 @@ function getData(){
     .then(res => res.json())
     .then(data => {
         posts = data
-        //to do: mpetodo para mostrar info en pantalla
+        renderPostList()
     })
     .catch(error => console.error('Error al mostrar datos'))
 }
@@ -20,7 +20,7 @@ function renderPostList(){
     postList.innerHTML = '';
 
     posts.forEach(post => {
-        const listItems = document.createElement('li');
+        const listItem = document.createElement('li');
         listItem.classList.add('postItem');
         listItem.innerHTML = `
 
@@ -29,10 +29,14 @@ function renderPostList(){
         <button onclick = "editPost(${post.id})">Editar</button>
         <button onclick = "deletePost(${post.id})">Eliminar</button>
 
-        <div id='editForm-${post.id}' class='editForm' style='display:none'>
-            <label for='editTitle'>Título: </label>
-            <input type='text' id='editTitle'-${post.id}' value='${post.title}' required>
+        <div id="editForm-${post.id}" class="editForm" style="display:none"> 
+            <label for="editTitle">Título: </label> 
+            <input type="text" id="editTitle"-${post.id}" value="${post.title}" required>
+            <label for="editBody"> Comentario: </label>
+            <textarea id="editBody-${post.id}" required></textarea>
+            <button onclick="updatePost(${post.id})"> Acutalizar </button>
         </div>
         `
+        postList.appendChild(listItem)
     })
 }

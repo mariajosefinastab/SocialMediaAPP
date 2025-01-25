@@ -40,3 +40,21 @@ input, textarea{
     box-sizing: border-box;
     border: none;
 }
+
+ul{
+    list-style: none;
+    padding: 0;
+}
+
+.editForm{
+    display: none;
+    margin-top: 10px;
+}
+
+.postItem{
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 2px 4px rgb(100, 100, 100);
+    border-radius: 2px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
