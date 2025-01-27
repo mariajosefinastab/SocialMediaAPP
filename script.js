@@ -40,3 +40,104 @@ function renderPostList(){
         postList.appendChild(listItem)
     })
 }
+
+
+/*Creating a resource
+fetch('https://jsonplaceholder.typicode.com/posts', {
+  method: 'POST',
+  body: JSON.stringify({
+    title: 'foo',
+    body: 'bar',
+    userId: 1,
+  }),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  },
+})
+  .then((response) => response.json())
+  .then((json) => console.log(json));*/
+
+function postData(){
+
+    const postTitleInput = document.getElementById('postTitle');
+    const postBodyInput = document.getElementById('postBody');
+
+    const postTitle = postTitleInput.value;
+    const postBody = postBodyInput.value;
+
+
+
+if(postTitle.trim() == '' || postBody.trim() == ''){
+    alert('Los campos son obligatorios')
+    return
+}
+
+    fetch(urlBase, {
+        method: 'POST',
+        body: JSON.stringify({
+          title: postTitle,
+          body: postBody,
+          userId: 1,
+        }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+    })
+    .then(res => res.json())
+    .then(data => {
+        posts.push(data)
+        renderPostList();
+        postTitleInput.value = '' //limpia textarea luego de postear
+        postBodyInput.value = ''
+    })
+    .catch(error => console.error('Error al querer crear posteo: ', error))
+}
+
+function editPost(id){
+    const editForm = document.getElementById(`editForm-${id}`);
+    editForm.style.display = (editForm.style.display == 'none') ? 'block' : 'none'
+}
+
+function updatePost(id){
+    const editTitle = document.getElementById(`editTitle-${id}`);
+    const editBody = document.getElementById(`editBody-${id}`);
+
+    /*Updating a resource
+fetch('https://jsonplaceholder.typicode.com/posts/1', {
+  method: 'PUT',
+  body: JSON.stringify({
+    id: 1,
+    title: 'foo',
+    body: 'bar',
+    userId: 1,
+  }),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  },
+})
+  .then((response) => response.json())
+  .then((json) => console.log(json));*/
+
+    fetch(`${urlBase}/${id}`, {
+
+        method: 'PUT',
+        body: JSON.stringify({
+          id: id,
+          title: editTitle,
+          body: editBody,
+          userId: 1,
+        }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+    })
+    .then(res => res.json())
+    .then(data => {
+        const index = posts.findIndex(post => post.id === data.id) //busca el índice que se debe actualizar
+        if(index != -1){ // si no da -1
+            posts[index] = data //el índice que encontró = data(actualiza el que encntró)
+        } else {
+            alert('Hubo un error al actualizar la información del posteo')
+        }
+    })
+}
