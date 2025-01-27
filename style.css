@@ -9,7 +9,7 @@ body {
 
 button{
     padding: 8px 12px;
-    margin: 5px;
+    margin: 30px;
     cursor: pointer;
     background-color: gainsboro;
     border: none;
@@ -26,6 +26,9 @@ button:hover{
 form{
     background-color: rgb(210, 210, 210);
     box-shadow: 0 2px 4px rgb(100, 100, 100);
+    justify-content: center;
+    padding: 20px;
+    position: relative;
 }
 
 label{
@@ -34,7 +37,7 @@ label{
 }
 
 input, textarea{
-    width: 90%;
+    width: 70%;
     padding: 10px;
     margin-bottom: 10px;
     box-sizing: border-box;
@@ -57,4 +60,10 @@ ul{
     border-radius: 2px;
     padding: 10px;
     margin-bottom: 20px;
+}
+
+form button{
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
 }
