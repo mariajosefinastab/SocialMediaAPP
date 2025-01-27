@@ -33,7 +33,7 @@ function renderPostList(){
             <label for="editTitle">Título: </label> 
             <input type="text" id="editTitle"-${post.id}" value="${post.title}" required>
             <label for="editBody"> Comentario: </label>
-            <textarea id="editBody-${post.id}" required></textarea>
+            <textarea id="editBody-${post.id}" required>${post.body}</textarea>
             <button onclick="updatePost(${post.id})"> Acutalizar </button>
         </div>
         `
@@ -99,8 +99,8 @@ function editPost(id){
 }
 
 function updatePost(id){
-    const editTitle = document.getElementById(`editTitle-${id}`);
-    const editBody = document.getElementById(`editBody-${id}`);
+    const editTitle = document.getElementById(`editTitle-${id}`).value;
+    const editBody = document.getElementById(`editBody-${id}`).value;
 
     /*Updating a resource
 fetch('https://jsonplaceholder.typicode.com/posts/1', {
@@ -138,6 +138,28 @@ fetch('https://jsonplaceholder.typicode.com/posts/1', {
             posts[index] = data //el índice que encontró = data(actualiza el que encntró)
         } else {
             alert('Hubo un error al actualizar la información del posteo')
+        } renderPostList()
+    })
+    .catch(error => console.error('Error al querer actualizar posteo: ', error))
+}
+
+/*Deleting a resource
+fetch('https://jsonplaceholder.typicode.com/posts/1', {
+  method: 'DELETE',
+});*/
+
+function deletePost(id){
+    fetch(`${urlBase}/${id}`, {
+        method: 'DELETE',
+    })
+    .then(res => {
+        if(res.ok){
+            post = posts.filter(post => post.id != id) //agrra el response y si es ok filtra los post que no coincidan con el id, están todos salvo los que coincidan
+            renderPostList();
+        }else{
+            alert('Hubo un error y no se pudo eliminar el posteo')
         }
     })
+
+    .catch(error => console.error('Hubo un error:', error))
 }
