@@ -85,7 +85,7 @@ if(postTitle.trim() == '' || postBody.trim() == ''){
     })
     .then(res => res.json())
     .then(data => {
-        posts.push(data)
+        posts.unshift(data)
         renderPostList();
         postTitleInput.value = '' //limpia textarea luego de postear
         postBodyInput.value = ''

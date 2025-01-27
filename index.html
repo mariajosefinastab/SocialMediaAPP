@@ -11,10 +11,6 @@
 </head>
 <body>
     
-    <h2>Posteos</h2>
-    <button onclick="getData()">Posteos</button>
-    <ul id="postList"></ul>
-
     <h2>¿En qué estás pensando?</h2>
     <form id="postForm" onsubmit="event.preventDefault(); postData()">
         <label for="postTitle">Título</label>
@@ -23,6 +19,12 @@
         <textarea type="text" id="postBody" required></textarea>
         <button type="submit">Enviar</button>
     </form>
+
+    <h2>Posteos</h2>
+    <button onclick="getData()">Posteos</button>
+    <ul id="postList"></ul>
+
+
 
     <script src="script.js"></script>
 </body>
